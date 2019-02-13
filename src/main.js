@@ -6,6 +6,8 @@ import router from './router'
 
 import VueResource from 'vue-resource'
 Vue.use(VueResource)
+// 设置请求跟路径
+Vue.http.options.root = 'http://www.lovegf.cn:8899/api/';
 
 // 清楚默认样式
 import './css/common.css'
@@ -22,6 +24,12 @@ import './lib/mui/css/icons-extra.css'
 
 Vue.config.productionTip = false
 
+
+// 导入moment 过滤时间
+import moment from 'moment'
+Vue.filter('dateFormat', (dateStr, pattern = 'YYYY-MM_DD HH:mm:ss') => {
+  return moment(dateStr).format(pattern)
+})
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
