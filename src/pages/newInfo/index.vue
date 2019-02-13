@@ -7,6 +7,7 @@
         </p>
         <hr>
         <div class="content" v-html="newInfo.content"></div>
+        <comment></comment>
     </div>
 </template>
 
@@ -44,6 +45,11 @@ export default {
         .subTitle{
             display: flex;
             justify-content: space-between
+        }
+        .content{
+            img{
+                width: 100%;
+            }
         }
     }
 </style>

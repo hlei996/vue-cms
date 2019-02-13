@@ -24,6 +24,10 @@ import './lib/mui/css/icons-extra.css'
 
 Vue.config.productionTip = false
 
+// 导入 comment组件
+import commentComponent from './components/comment.vue'
+
+Vue.component('comment', commentComponent)
 
 // 导入moment 过滤时间
 import moment from 'moment'
