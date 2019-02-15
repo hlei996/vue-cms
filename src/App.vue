@@ -81,4 +81,7 @@ export default {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+.mint-header.is-fixed {
+    z-index: 999;
+}
 </style>

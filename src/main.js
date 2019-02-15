@@ -24,6 +24,10 @@ import './lib/mui/css/icons-extra.css'
 
 Vue.config.productionTip = false
 
+// 安装 vue-pic-preview
+import VuePreview from 'vue-pic-preview'
+Vue.use(VuePreview)
+
 // 导入 comment组件
 import commentComponent from './components/comment.vue'
 
