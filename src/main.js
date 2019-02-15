@@ -31,7 +31,7 @@ Vue.component('comment', commentComponent)
 
 // 导入moment 过滤时间
 import moment from 'moment'
-Vue.filter('dateFormat', (dateStr, pattern = 'YYYY-MM_DD HH:mm:ss') => {
+Vue.filter('dateFormat', (dateStr, pattern = 'YYYY-MM-DD HH:mm:ss') => {
   return moment(dateStr).format(pattern)
 })
 /* eslint-disable no-new */

@@ -2,20 +2,59 @@
     <div class="comment-container">
         <h3>发表评论</h3>
         <hr>
-        <textarea placeholder="请输入要BB的内容(最多吐槽120字)" maxlength="120"></textarea>
-        <mt-button type="primary" size="large">发表评论</mt-button>
+        <textarea placeholder="请输入要BB的内容(最多吐槽120字)" maxlength="120" v-model="commentContent"></textarea>
+        <mt-button type="primary" size="large" @click="postComment">发表评论</mt-button>
         <div class="cmt-list">
-            <div class="cmt-item">
-                <div class="cmt-title">第1楼  用户：匿名用户  发表时间：2019-02-13 19:26:32</div>
-                <div class="cmt-body">前端23期湖北*王</div>
+            <div class="cmt-item"  v-for="(item, index) in comments" :key="index">
+                <div class="cmt-title">第{{index + 1}}楼  用户: {{item.user_name}}  发表时间：{{item.add_time | dateFormat}}</div>
+                <div class="cmt-body">{{item.content}}</div>
             </div>
         </div>
-        <mt-button type="danger" size="large" plain>加载更多</mt-button>
+        <mt-button type="danger" size="large" plain @click="getMore">加载更多</mt-button>
     </div>
 </template>
 
 <script>
+import { Toast } from "mint-ui";
 export default {
+    data(){
+        return {
+            comments: [],
+            pageIndex: 1,
+            commentContent: '',
+        }
+    },
+    created(){
+        this.getComments()
+    },
+    methods: {
+        getComments (){
+            this.$http.get('getcomments/'+ this.id +'?pageindex=' + this.pageIndex).then(result => {
+                if(result.body.status ===0 ){
+                    this.comments = [...this.comments,...result.body.message]              
+                }
+            })
+        },
+        getMore(){
+            this.pageIndex ++
+            this.getComments();
+        },
+        postComment(){
+            if(this.commentContent.trim().lenght ===0) {
+                return Toast('评论的内容不能为空!!!')
+            }
+            this.$http.post('postcomment/' + this.id,{content: this.commentContent}).then(result => {
+                if(result.body.status === 0){
+                    Toast('添加评论成功!!!')
+                    this.comments=[];
+                    this.pageIndex = 1;
+                    this.getComments();
+                    this.commentContent = ''
+                }
+            })
+        }
+    },
+    props: ["id"]
     
 }
 </script>

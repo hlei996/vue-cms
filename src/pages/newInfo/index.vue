@@ -7,7 +7,7 @@
         </p>
         <hr>
         <div class="content" v-html="newInfo.content"></div>
-        <comment></comment>
+        <comment :id="id"></comment>
     </div>
 </template>
 
